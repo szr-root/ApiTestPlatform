@@ -1,0 +1,52 @@
+.pro_page{
+	background-color: aliceblue;
+	background-image:url('@/assets/images/login_bg.svg') ;
+	height: 100vh;
+	min-height: 700px;
+	background-size: cover;
+	.pro_box{
+		height: 94%;
+		width: 96%;
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 10px;
+		position: relative;
+		left: 2%;
+		top: 3%;
+		// 顶部内容
+		.welcome{
+			color: #2a2a2a;
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			height: 80px;
+			line-height: 80px;
+			.el-button{
+				float: right;
+				margin: 10px 30px;
+			}
+			
+		}
+		// 项目卡片
+		.pro_list{
+			.pro{
+				height: 600px;
+				background: #00aaff;
+				text-align: center;
+				img{
+					height: 400px;
+				}
+				.btn_box{
+					margin-top: 20px;
+				}
+			}
+			.name{
+				color: #2a2a2a;
+				height: 80px;
+				background: #fff;
+				font: bold 28px/80px '微软雅黑';
+			}
+			
+		}
+	}
+		
+}
