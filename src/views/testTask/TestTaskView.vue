@@ -90,6 +90,17 @@
 							<span v-if="scope.row.status !== '执行中'">{{ scope.row.pass_rate + '%' }}</span>
 						</template>
 					</el-table-column>
+					<el-table-column label="总耗时" min-width="80">
+						<template #default="scope">
+							<span v-if="scope.row.status !== '执行中'">{{ scope.row.run_time}}</span>
+						</template>
+					</el-table-column>
+					<el-table-column label="执行人" min-width="80">
+						<template #default="scope">
+							<span v-if="scope.row.status !== '执行中'">{{ scope.row.tester}}</span>
+						</template>
+					</el-table-column>
+					
 					<el-table-column label="测试报告" width="100">
 						<template #default="scope">
 							<span v-if="scope.row.status === '执行中'">
@@ -135,6 +146,7 @@
 
 <script setup>
 	import { ProjectStore } from '@/stores/module/ProStore'
+	import {UserStore} from '@/stores/module/UserStore'
 	import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 	import { ElLoading } from 'element-plus'
 	import CaseEditor from '@/components/CaseEditor.vue'
@@ -142,6 +154,7 @@
 	import { ref, onMounted } from 'vue'
 	import tools from '@/utils/dateTools'
 	const pstore = ProjectStore()
+	const ustore = UserStore()
 	// 选择的测试计划
 	let activaTask = ref({
 		id: "",
@@ -266,7 +279,8 @@
 		if (pstore.env) {
 			const params = {
 				env: pstore.env,
-				task: activaTask.value.id
+				task: activaTask.value.id,
+				tester:ustore.username
 			};
 			ElMessage({
 				type: 'success',

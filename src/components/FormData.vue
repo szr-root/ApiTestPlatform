@@ -44,7 +44,8 @@
 						</template>
 					</el-table-column>
 				</el-table>
-				<iframe ref="mediaIframe" style="width: 100%; height: 300px;"></iframe>
+				<div><iframe ref="mediaIframe" style="width: 100%; height: 300px;"></iframe></div>
+				
 			</el-card>
 		</el-col>
 	</el-row>
@@ -128,7 +129,7 @@
 			uploadError(error) {
 				ElMessage({
 					type: 'error',
-					message: JSON.parse(error.message).msg,
+					message: error,
 					duration: 2000
 				});
 			},

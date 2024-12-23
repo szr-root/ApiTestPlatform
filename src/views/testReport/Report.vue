@@ -14,6 +14,7 @@
 						<el-descriptions-item label="执行任务">{{ state.record.task }}</el-descriptions-item>
 						<el-descriptions-item label="测试环境">{{ state.record.env }}</el-descriptions-item>
 						<el-descriptions-item label="通过率">{{ state.record.pass_rate + '%' }}</el-descriptions-item>
+						<el-descriptions-item label="总耗时">{{ state.record.run_time }}</el-descriptions-item>
 					</el-descriptions>
 				</el-card>
 				<el-card body-style="padding:5px">
@@ -68,11 +69,11 @@
 				<el-scrollbar height="calc(100vh - 117px)">
 					<div class="right_box">
 						<el-card v-for="(scent, index) in state.showScentDatas" :key="index">
-							<div class="title" v-if="scent.state == 'success'">
+							<div class="title" v-if="scent.status == '成功'">
 								<i class="el-icon-upload"></i>
 								{{ '测试业务流 : ' + scent.name + '【通过】' }}
 							</div>
-							<div class="title" v-else-if="scent.state == 'fail'" style="color: coral;">
+							<div class="title" v-else-if="scent.status == '失败'" style="color: coral;">
 								<i class="el-icon-upload"></i>
 								{{ '测试业务流 : ' + scent.name + '【失败】' }}
 							</div>
@@ -93,8 +94,8 @@
 								<el-table-column label="状态码" prop="status_cede" min-width="40px"></el-table-column>
 								<el-table-column label="断言结果" prop="state" min-width="40px">
 									<template #default="scope">
-										<span v-if="scope.row.state == '成功'" style="color: #00AA7F;">成功</span>
-										<span v-else-if="scope.row.state == '失败'" style="color: #ffaa00">失败</span>
+										<span v-if="scope.row.status == '成功'" style="color: #00AA7F;">成功</span>
+										<span v-else-if="scope.row.status == '失败'" style="color: #ffaa00">失败</span>
 										<span v-else style="color:#F56C6C">错误</span>
 									</template>
 								</el-table-column>
@@ -136,14 +137,14 @@
 		if (response.status === 200) {
 			state.report = response.data.info;
 			state.showScentDatas = { ...state.report.results };
-			console.log(state.report)
+			// console.log(state.report)
 		}
 	}
 	async function getRecordsInfo(id){
 		const response = await api.getRecordsInfo(id);
 		if (response.status === 200) {
 			state.record = response.data;
-			console.log(state.record)
+			// console.log(state.record)
 		}
 	}
 	async function sendFeishu(){
@@ -181,19 +182,19 @@
 	const successscent = computed(() => {
 
 		return state.report.results.filter(function(val, index, array) {
-			return val.state === 'success';
+			return val.status === '成功';
 		})
 
 	})
 	const failscent = computed(() => {
 		return state.report.results.filter(function(val, index, array) {
-			return val.state === 'fail';
+			return val.status === '失败';
 		})
 	})
 
 	const errorscent = computed(() => {
 		return state.report.results.filter(function(val, index, array) {
-			return val.state === 'error';
+			return val.status === '错误';
 		})
 	})
 
