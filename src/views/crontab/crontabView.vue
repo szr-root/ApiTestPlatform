@@ -4,21 +4,22 @@
 			size="small">添加定时任务</el-button>
 
 		<el-table :data="state.cronList" style="width: 100%" size="small" border>
-			<el-table-column label="创建时间" min-width="180">
+			<el-table-column label="创建时间" min-width="50">
 				<template #default="scope">
 					{{ tools.rTime(scope.row.create_time) }}
 				</template>
 			</el-table-column>
-			<el-table-column prop="name" label="名称" min-width="140"></el-table-column>
-			<el-table-column prop="task_name" label="执行任务" min-width="140"></el-table-column>
-			<el-table-column prop="env_name" label="执行环境" min-width="140"></el-table-column>
-			<el-table-column prop="rule" label="执行规则" min-width="140"></el-table-column>
-			<el-table-column label="是否开启" min-width="120">
+			<el-table-column prop="name" label="名称" min-width="100"></el-table-column>
+			<el-table-column prop="task_name" label="执行任务" min-width="80"></el-table-column>
+			<el-table-column prop="env_name" label="执行环境" min-width="80"></el-table-column>
+			<el-table-column prop="run_type" label="执行规则" min-width="50"></el-table-column>
+			<el-table-column label="是否开启" min-width="30">
 				<template #default="scope">
-					<el-switch @change='switchCronStatus(scope.row)' v-model="scope.row.status" active-color="#13ce66"
+					<el-switch @change='switchCronStatus(scope.row)' v-model="scope.row.state" active-color="#13ce66"
 						inactive-color="#b1b1b1"></el-switch>
 				</template>
 			</el-table-column>
+			
 			<el-table-column label="操作" min-width="100">
 				<template #default="scope">
 					<el-tooltip class="item" effect="dark" content="编辑" placement="top">

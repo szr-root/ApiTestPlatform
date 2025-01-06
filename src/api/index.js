@@ -4,7 +4,7 @@ import { ElNotification ,ElMessage} from 'element-plus'
 // =========进行基本的配置===============
 // 后端接口的域名设置
 // axios.defaults.baseURL = 'http://127.0.0.1:8000'
-axios.defaults.baseURL = 'http://172.20.20.54:8000'
+axios.defaults.baseURL = 'http://192.168.31.203:8000'
 // axios.defaults.baseURL = 'http://139.159.205.158:18899'
 // 请求成功还是失败的状态码范围
 axios.defaults.validateStatus = function(status) {
